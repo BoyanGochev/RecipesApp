@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipesService } from '../recipes.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit',
@@ -9,9 +9,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EditComponent implements OnInit {
 
+  recipe: any;
+  id: string;
+
   constructor(
     private recipesService: RecipesService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -19,13 +23,21 @@ export class EditComponent implements OnInit {
   }
 
   loadRecipe() {
-    const id = this.activatedRoute.snapshot.params.id;
+    this.id = this.activatedRoute.snapshot.params.id;
 
-    this.recipesService.getRecipe(id).subscribe(
+    this.recipesService.getRecipe(this.id).subscribe(
       res => {
-        console.log(res)
+        this.recipe = res;
       }
-    )
+    );
+  }
+
+  editHandler(data) {
+    this.recipesService.editRecipe(data, this.id).subscribe(
+      res => {
+        this.router.navigate(['/']);
+      }
+    );
   }
 
 }

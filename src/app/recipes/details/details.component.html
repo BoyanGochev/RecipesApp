@@ -12,7 +12,7 @@
             </div>
             <div class="actions">
                 <div *ngIf="isCreator">
-                    <a class="btn btn-danger" href="#">Archive</a>
+                    <a class="btn btn-danger" (click)="deleteHandler()">Archive</a>
                     <a class="btn btn-info" (click)="navigateEdit()">Edit</a>
                 </div>
 

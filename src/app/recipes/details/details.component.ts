@@ -9,8 +9,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DetailsComponent implements OnInit {
 
-  recipe;
+  recipe: any;
   isCreator: boolean;
+  id: string;
 
   constructor(
     private recipesService: RecipesService,
@@ -23,8 +24,8 @@ export class DetailsComponent implements OnInit {
   }
 
   loadRecipe() {
-    const id = this.activatedRoute.snapshot.params.id;
-    this.recipesService.getRecipe(id).subscribe(
+    this.id = this.activatedRoute.snapshot.params.id;
+    this.recipesService.getRecipe(this.id).subscribe(
       res => {
         this.recipe = res;
         this.isCreator = sessionStorage.getItem('userId') === res._acl.creator;
@@ -33,7 +34,15 @@ export class DetailsComponent implements OnInit {
     );
   }
 
-  navigateEdit(){
+  deleteHandler() {
+    this.recipesService.deleteRecipe(this.id).subscribe(
+      res => {
+              this.router.navigate(['/']);
+      }
+    );
+  }
+
+  navigateEdit() {
     this.router.navigate([`/edit/${this.recipe._id}`]);
   }
 

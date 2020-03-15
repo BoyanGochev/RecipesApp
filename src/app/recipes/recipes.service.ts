@@ -56,11 +56,32 @@ export class RecipesService {
 
   }
 
+  editRecipe(input, id) {
+    const category = input.category;
+
+    const data = {
+      meal: input.meal,
+      ingredients: input.ingredients.split(' '),
+      prepMethod: input.prepMethod,
+      description: input.description,
+      category: input.category,
+      foodImageURL: input.foodImageURL,
+      categoryImageURL: this.categories[category],
+      likesCounter: input.likesCounter
+    };
+
+    return this.http.put(`${this.appDataUrl}/${id}`, JSON.stringify(data), this.httpKinveyOptions);
+  }
+
   getRecipes() {
     return this.http.get(`${this.appDataUrl}`, this.httpKinveyOptions);
   }
 
   getRecipe(id) {
     return this.http.get(`${this.appDataUrl}/${id}`, this.httpKinveyOptions);
+  }
+
+  deleteRecipe(id) {
+    return this.http.delete(`${this.appDataUrl}/${id}`, this.httpKinveyOptions);
   }
 }
