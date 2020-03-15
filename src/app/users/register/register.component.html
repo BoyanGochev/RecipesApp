@@ -1,0 +1,34 @@
+<form class="text-center p-5 form-layout" [formGroup]="registerForm" (ngSubmit)="registerHandler(registerForm.value)">
+
+    <p class="h4 mb-4">Sign up</p>
+
+    <div class="form-row mb-4">
+        <div class="col">
+
+            <input formControlName="firstName" type="text" id="defaultRegisterFormFirstName" class="form-control" name="firstName" placeholder="First name">
+            <p class="error" *ngIf="registerForm.get('firstName')?.errors?.required && registerForm.get('firstName').touched">First name is required</p>
+        </div>
+        <div class="col">
+
+            <input formControlName="lastName" type="text" id="defaultRegisterFormLastName" class="form-control" name="lastName" placeholder="Last name">
+            <p class="error" *ngIf="registerForm.get('lastName')?.errors?.required && registerForm.get('lastName').touched">Last name is required</p>
+        </div>
+    </div>
+
+    <input formControlName="username" type="text" id="defaultRegisterFormUsername" class="form-control mb-4" name="username" placeholder="Username">
+    <p class="error" *ngIf="registerForm.get('username')?.errors?.required && registerForm.get('username').touched">Username is required</p>
+
+    <div formGroupName="passwords">
+        <input formControlName="password" type="password" id="defaultRegisterFormPassword" class="form-control" name="password" placeholder="Password">
+        <p class="error" *ngIf="registerForm.get('passwords.password')?.errors?.required && registerForm.get('passwords.password').touched">Password is required</p>
+        <hr>
+        <input formControlName="rePassword" type="password" id="defaultRegisterRepeatPassword" class="form-control" name="repeatPassword" placeholder="Repeat Password">
+        <p class="error" *ngIf="registerForm.get('passwords')?.errors?.passwordsMatch">Passwords don't Match</p>
+    </div>
+
+
+    <button class="btn btn-danger my-4 btn-block w-25 m-auto" [disabled]="registerForm.invalid">Sign up</button>
+
+</form>
+
+{{registerForm.value | json}}
