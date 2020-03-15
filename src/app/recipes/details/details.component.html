@@ -17,7 +17,7 @@
                 </div>
 
                 <div *ngIf="!isCreator">
-                    <a class="btn btn-success" href="#"> 900 likes</a>
+                    <a class="btn btn-success" (click)="likesHandler()"> {{recipe.likesCounter}} likes</a>
                 </div>
 
             </div>

@@ -41,8 +41,26 @@ export class DetailsComponent implements OnInit {
     );
   }
 
-  navigateEdit() {
-    this.router.navigate([`/edit/${this.recipe._id}`]);
-  }
+  likesHandler() {
+    let recipe;
 
+    this.recipesService.getRecipe(this.id).subscribe(
+      res => {
+        recipe = res;
+        recipe.likesCounter += 1;
+        recipe.ingredients = recipe.ingredients.toString();
+        this.recipesService.editRecipe(recipe, this.id).subscribe(
+          res1 => {
+            this.router.navigate([`/`]);
+
+          }
+        );
+      }
+    );
+
+
+
+
+
+  }
 }

@@ -28,7 +28,7 @@ export class NavComponent implements OnInit {
     this.usersService.logout().subscribe(
       res => {
         sessionStorage.clear();
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
       }
     );
   }

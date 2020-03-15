@@ -27,7 +27,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn = sessionStorage.getItem('authtoken') !== null;
-    this.loadRecipes();
+    if (this.isLoggedIn) {
+      this.loadRecipes();
+    }
   }
 
 }
