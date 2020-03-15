@@ -6,6 +6,7 @@ import { RegisterComponent } from './users/register/register.component';
 import { ShareComponent } from './recipes/share/share.component';
 import { DetailsComponent } from './recipes/details/details.component';
 import { EditComponent } from './recipes/edit/edit.component';
+import { ProfileComponent } from './users/profile/profile.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'edit/:id',
     component: EditComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
   }
 ];
 

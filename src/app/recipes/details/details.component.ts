@@ -26,10 +26,9 @@ export class DetailsComponent implements OnInit {
   loadRecipe() {
     this.id = this.activatedRoute.snapshot.params.id;
     this.recipesService.getRecipe(this.id).subscribe(
-      res => {
+      (res: any) => {
         this.recipe = res;
         this.isCreator = sessionStorage.getItem('userId') === res._acl.creator;
-        console.log(this.recipe);
       }
     );
   }
@@ -37,7 +36,7 @@ export class DetailsComponent implements OnInit {
   deleteHandler() {
     this.recipesService.deleteRecipe(this.id).subscribe(
       res => {
-              this.router.navigate(['/']);
+        this.router.navigate(['/']);
       }
     );
   }

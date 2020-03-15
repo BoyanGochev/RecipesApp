@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { UsersService } from 'src/app/users/users.service';
 
 @Component({
   selector: 'app-nav',
@@ -12,22 +13,27 @@ export class NavComponent implements OnInit {
   names: string;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private usersService: UsersService
   ) {
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         this.isLoggedIn = sessionStorage.getItem('authtoken') !== null;
+        this.names = sessionStorage.getItem('names');
       }
     });
   }
 
-  logout() {
-    sessionStorage.clear();
-    this.router.navigate(['/']);
+  logoutHandler() {
+    this.usersService.logout().subscribe(
+      res => {
+        sessionStorage.clear();
+        this.router.navigate(['/']);
+      }
+    );
   }
 
   ngOnInit() {
-    this.names = sessionStorage.getItem('names');
   }
 
 

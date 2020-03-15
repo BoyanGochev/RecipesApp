@@ -1,0 +1,14 @@
+<ng-container *ngIf="myRecipes.length === 0">
+    <div>
+        <a routerLink="/share">Create your first recipe</a>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="myRecipes.length > 0">
+
+    <div>You have been created {{myRecipes.length}} recipes so far</div>
+    <ul *ngFor="let recipe of myRecipes">
+        <a routerLink="/details/{{recipe._id}}">{{recipe.meal}}</a>
+    </ul>
+
+</ng-container>

@@ -4,9 +4,9 @@
         <nav class="nav nav-masthead justify-content-center">
             <a class="nav-link" routerLink="/home">Home</a>
             <ng-container *ngIf="isLoggedIn">
-                <a class="nav-link" href="#">Welcome, {{names}}!</a>
+                <a class="nav-link" routerLink="/profile">Welcome, {{names}}!</a>
                 <a class="nav-link" routerLink="/share">Share recipe</a>
-                <a class="nav-link" (click)="logout()">Logout</a>
+                <a class="nav-link" (click)="logoutHandler()">Logout</a>
             </ng-container>
             <ng-container *ngIf="!isLoggedIn">
                 <a class="nav-link" routerLink="/login">Login</a>
